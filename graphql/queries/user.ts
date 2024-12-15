@@ -1,5 +1,6 @@
+import { graphqlClient } from '@/clients/api';
 import { gql, GraphQLClient } from 'graphql-request';
-
+const client = graphqlClient();
 export const getToken = async (token: string) => {
   const variables = {
     token,
@@ -10,9 +11,6 @@ export const getToken = async (token: string) => {
       verifyGoogleToken(token: $token)
     }
   `;
-
-  const endpoint = 'http://localhost:4000/graphql';
-  const client = new GraphQLClient(endpoint);
 
   try {
     console.log('Variables:', variables);
