@@ -1,5 +1,5 @@
-import { graphqlClient } from '@/clients/api';
-import { gql, GraphQLClient } from 'graphql-request';
+import { graphqlClient } from "@/clients/api";
+import { gql } from 'graphql-request';
 const client = graphqlClient();
 export const getToken = async (token: string) => {
   const variables = {
