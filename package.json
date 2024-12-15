@@ -10,10 +10,7 @@
   },
   "dependencies": {
     "@react-oauth/google": "^0.12.1",
-<<<<<<< HEAD
     "graphql-request": "^7.1.2",
-=======
->>>>>>> c48d015dd54c08024fbad1509b80ad23a4ef28fe
     "next": "15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
