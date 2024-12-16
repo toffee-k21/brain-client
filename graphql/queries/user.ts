@@ -44,7 +44,7 @@ export const getCurrentUser = async () => {
     }
     const data = await client.request(document);
     console.log('logged in user info:', data);
-    // return data;
+    return data;
   } catch (error) {
     console.error('GraphQL Request Failed:', error);
     throw error; // Re-throw the error if necessary
