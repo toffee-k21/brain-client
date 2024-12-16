@@ -8,7 +8,7 @@ export const graphqlClient = () =>{
     const endpoint = 'http://localhost:4000/graphql';
     const client = new GraphQLClient(endpoint, {
         headers: {
-            Authorization: `Bearer ${window.localStorage.getItem('second_brain_token')}`
+            Authorization: `${window.localStorage.getItem('second_brain_token')}`
         }
     });
     return client;

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Addthought from "./components/Add-thought";
 import CardSection from "./components/CardSection";
 import { GoogleLogin } from "@react-oauth/google";
-import { getToken } from "@/graphql/queries/user";
+import { getCurrentUser, getToken } from "@/graphql/queries/user";
 
 export default function Home({params}:any) {
 
@@ -18,14 +18,15 @@ export default function Home({params}:any) {
        <GoogleLogin
               onSuccess={async credentialResponse => {
                 console.log(credentialResponse);
-                 const data:any = await getToken(credentialResponse.credential!);
+                const data:any = await getToken(credentialResponse.credential!);
                 console.log("data agaya ", data);
-                localStorage.setItem('token', data.verifyGoogleToken);
+                localStorage.setItem('second_brain_token', `Bearer ${data.verifyGoogleToken}`);
               }}
               onError={() => {
                 console.log('Login Failed');
               }}
             />
+            <button onClick={() => getCurrentUser() } >click</button>
       </div>
     </div>
   </div>
