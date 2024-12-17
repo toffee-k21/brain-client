@@ -5,7 +5,7 @@ import CardSection from "./components/CardSection";
 import { GoogleLogin } from "@react-oauth/google";
 import { getCurrentUser, getToken } from "@/graphql/queries/user";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { useCurrentUser } from "@/hooks/useGetCurrenUser";
+import { useCurrentUser } from "@/hooks/useCurrenUser";
 
 interface GetCurrentUserData {
   id: string;
