@@ -55,6 +55,7 @@ export default function Home({params}:any) {
         </div> : 
         <div></div>}
       </div>
+      <div></div>
     </div>
     <ReactQueryDevtools initialIsOpen={false} />
   </div>
