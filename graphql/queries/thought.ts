@@ -1,8 +1,8 @@
 import { graphqlClient } from "@/clients/api";
 import { gql } from "graphql-request";
 
-const client = graphqlClient();
 export const getUserThoughts = async () =>{
+  const client = graphqlClient();
   const document = gql`
     query GetThoughts {
   getThoughts {

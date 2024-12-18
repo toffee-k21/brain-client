@@ -4,7 +4,7 @@ import { GraphQLClient } from "graphql-request";
 export const graphqlClient = () =>{
       if (typeof window == "undefined") {
       return null;
-  }
+   }
     const endpoint = 'http://localhost:4000/graphql';
     const client = new GraphQLClient(endpoint, {
         headers: {

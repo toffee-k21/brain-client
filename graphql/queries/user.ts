@@ -1,7 +1,8 @@
 import { graphqlClient } from "@/clients/api";
+import { useCurrentUser } from "@/hooks/useCurrenUser";
 import { gql } from 'graphql-request';
-const client = graphqlClient();
 export const getToken = async (token: string) => {
+  const client = graphqlClient();
   const variables = {
     token,
   };
@@ -27,7 +28,7 @@ export const getToken = async (token: string) => {
 };
 
 export const getCurrentUser = async () => {
-
+  const client = graphqlClient();
   const document = gql`
     query {
       getCurrentUser {

@@ -28,7 +28,7 @@ export default function Home({params}:any) {
     <CardSection />
     </div>
     <div className="bg-neutral-950 border-l-[0.1px]  border-gray-700 mx-4 p-2 ">
-        <div className="border-gray-700 border-[0.1px] h-[560px] p-2 rounded-md relative">
+        <div className=" my-4 border-gray-700 border-[0.1px] h-[260px] p-2 rounded-md relative">
       
           {userData?.getCurrentUser == null ? <div>
             <div className="py-4 text-lg text-pink-400">New to Second Brain ?</div><GoogleLogin
@@ -55,7 +55,9 @@ export default function Home({params}:any) {
         </div> : 
         <div></div>}
       </div>
-      <div></div>
+        <div className="border-gray-700 border-[0.1px] h-[260px] p-2 rounded-md relative my-4 playwrite-mx-guides-regular">
+          Hello welcome to Second Brain, Here you can dump your ideas and thoughts, and focus on present. Don't worry we don't gonna save your thoughts, so feel free to dump anything you want.
+      </div>
     </div>
     <ReactQueryDevtools initialIsOpen={false} />
   </div>
