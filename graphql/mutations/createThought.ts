@@ -3,10 +3,11 @@ import { gql } from "graphql-request";
 
 const client = graphqlClient();
 
-export const CreateThought = async (data:string) =>{
+export const CreateThought = async (data:{content: string, private:boolean}) =>{
     const provider = {
         payload:{
-            content : data
+            content : data.content,
+            private : data.private
         }
     }
   const document = gql`

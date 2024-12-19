@@ -8,6 +8,7 @@ export const getUserThoughts = async () =>{
   getThoughts {
     id
     content
+    createdAt
     user {
       name
       email
