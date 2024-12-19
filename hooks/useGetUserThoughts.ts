@@ -1,4 +1,4 @@
-import { getUserThoughts } from "@/graphql/queries/thought"
+import { exploreThoughts, getUserThoughts } from "@/graphql/queries/thought"
 import { useQuery } from "@tanstack/react-query";
 
 // export const useGetUserThoughts = () =>{
@@ -6,10 +6,13 @@ import { useQuery } from "@tanstack/react-query";
 // return data;
 // }
 
-export function useGetUserThoughts():any {
+export function useGetUserThoughts(isExplore:boolean):any {
+  let func; 
+   isExplore ?  func = exploreThoughts : func = getUserThoughts;
   const { isPending, error, data } = useQuery({
     queryKey: ['user-thoughts'],
-    queryFn:  getUserThoughts
+    queryFn:  func,
+    refetchInterval: 5000
   });
   return data;
 }

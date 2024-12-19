@@ -5,8 +5,9 @@ import { useCurrentUser } from '@/hooks/useCurrenUser';
 import { useGetUserThoughts } from '@/hooks/useGetUserThoughts';
 
 
-const CardSection = () => {
-  const data = useGetUserThoughts()?.getThoughts;
+const CardSection = ({ isExplore }:{isExplore:boolean}) => {
+  let data =[];
+  isExplore == true ? data = useGetUserThoughts(isExplore)?.exploreThoughts : data = useGetUserThoughts(isExplore)?.getThoughts;
   if(data){
     console.log(data);
   }

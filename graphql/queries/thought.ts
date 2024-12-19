@@ -27,3 +27,31 @@ export const getUserThoughts = async () =>{
     throw error; 
   }
 }
+
+export const exploreThoughts = async () =>{
+  const client = graphqlClient();
+  const document = gql`
+query Query {
+  exploreThoughts {
+    id
+    content
+    createdAt
+    user {
+      name
+      email
+    }
+  }
+}
+  `;
+   try {
+    if (client == null) {
+      throw new Error('Client not initialized');
+    }
+    const data = await client.request(document);
+    return data;
+  } catch (error) {
+    console.error('GraphQL Request Failed:', error);
+    throw error; 
+  }
+}
+

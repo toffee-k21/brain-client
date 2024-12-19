@@ -3,9 +3,9 @@ import Image from "next/image";
 import Addthought from "./components/Add-thought";
 import CardSection from "./components/CardSection";
 import { GoogleLogin } from "@react-oauth/google";
-import { getCurrentUser, getToken } from "@/graphql/queries/user";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { getToken } from "@/graphql/queries/user";
 import { useCurrentUser } from "@/hooks/useCurrenUser";
+import { use, useEffect, useState } from "react";
 
 interface GetCurrentUserData {
   id: string;
@@ -17,19 +17,23 @@ interface GetCurrentUserData {
 interface UserData {
   getCurrentUser: GetCurrentUserData | null;
 }
-export default function Home({params}:any) {
-
-  const userData:UserData = useCurrentUser();
+export default function Home({ params }: any) {
+  const [noteToMyself, setNoteToMyself] = useState<string>("");
+  const userData: UserData = useCurrentUser();
+  useEffect(() => {
+    return () => {
+      localStorage.setItem('note_to_myself', noteToMyself);
+    }
+  }, [])
 
   return (
-  <div className="px-7 md:px-[16%] grid grid-cols-3 h-screen overflow-hidden">
-    <div className="col-span-2 my-16 overflow-y-scroll h-[550px]" style={{scrollbarWidth: 'none'}}>
-    <Addthought />
-    <CardSection />
-    </div>
-    <div className="bg-neutral-950 border-l-[0.1px]  border-gray-700 mx-4 p-2 ">
-        <div className=" my-4 border-gray-700 border-[0.1px] h-[260px] p-2 rounded-md relative">
-      
+    <div className="px-7 md:px-[16%] grid grid-cols-3 h-screen overflow-hidden">
+      <div className="col-span-2 my-16 overflow-y-scroll h-[550px]" style={{ scrollbarWidth: 'none' }}>
+        <Addthought />
+        <CardSection isExplore={false} />
+      </div>
+      <div className="bg-neutral-950 border-l-[0.1px]  border-gray-700 mx-4 p-2 ">
+        <div className=" my-4 border-gray-700 border-[0.1px] h-[260px] p-3 rounded-md relative">
           {userData?.getCurrentUser == null ? <div>
             <div className="py-4 text-lg text-pink-400">New to Second Brain ?</div><GoogleLogin
               onSuccess={async credentialResponse => {
@@ -43,23 +47,23 @@ export default function Home({params}:any) {
               }}
             />
           </div> : <div></div>}
-            {/* <button onClick={() => getCurrentUser() } >click</button> */}
-      {userData && userData?.getCurrentUser ? <div className="flex items-center">
-            <div className="text-xl m-2">Hello, </div>{" "}
-        
-              <div className="text-pink-400 text-lg">{userData?.getCurrentUser.name}</div>
-              <div className="flex absolute bottom-4 left-4 items-center">
-              <Image src={userData?.getCurrentUser?.proflieImgURL!} alt={"profile image"} width={40} height={40} className="rounded-full mx-2"/>
-              <div>{userData?.getCurrentUser.name}</div></div>
-        
-        </div> : 
-        <div></div>}
-      </div>
-        <div className="border-gray-700 border-[0.1px] h-[260px] p-2 rounded-md relative my-4 playwrite-mx-guides-regular">
-          Hello welcome to Second Brain, Here you can dump your ideas and thoughts, and focus on present. Don't worry we don't gonna save your thoughts, so feel free to dump anything you want.
+          <span className="text-pink-500 text-lg">Note: to myself</span>
+          <textarea name="" id="" placeholder="you can write notes for yourself here" className="bg-neutral-950 focus:ring-0 outline-none resize-none py-4" rows={7} cols={27} style={{ scrollbarWidth: "none" }} onChange={(e) => setNoteToMyself(e.target.value)}></textarea>
+
+        </div>
+        <div className="border-gray-700 border-[0.1px] h-[260px] p-4 rounded-md relative my-4 flex flex-col">
+          {
+            userData && userData?.getCurrentUser ? <div className="flex items-center">
+              <div className="flex absolute bottom-4 left-4 items-center w-full">
+                <div className="flex items-center bg-neutral-900 p-2 w-[85%] rounded-3xl">
+                  <Image src={userData?.getCurrentUser?.proflieImgURL!} alt={"profile image"} width={30} height={30} className="rounded-full mr-2 " />
+                  <div className="text-pink-500">{userData?.getCurrentUser.name}</div></div>
+              </div>
+            </div> :
+              <div></div>
+          }
+        </div>
       </div>
     </div>
-    <ReactQueryDevtools initialIsOpen={false} />
-  </div>
   );
 }
